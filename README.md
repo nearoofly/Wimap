@@ -12,7 +12,8 @@ Ouvrez le fichier index.html dans un navigateur web.
 
 Vous verrez une interface avec une carte et un champ de recherche.
 
-Recherche de Lieux : 
+Recherche de Lieux :
+
 Lien:https://wharkly47.github.io/Wimap/
 Saisissez un lieu dans le champ de recherche.
 Cliquez sur le bouton "Rechercher" ou appuyez sur la touche "Enter" pour afficher ce lieu sur la carte.
