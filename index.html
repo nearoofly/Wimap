@@ -26,13 +26,11 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Ajout d'un marqueur pour la position actuelle
     var currentLocationMarker = null;
 
     function searchLocation() {
       var input = document.getElementById('searchInput').value;
       if (input.length > 0) {
-        // Utilisation du service de géocodage Nominatim pour obtenir les coordonnées du lieu recherché
         var geocodeUrl = 'https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(input);
 
         fetch(geocodeUrl)
@@ -45,15 +43,12 @@
               var latitude = parseFloat(result.lat);
               var longitude = parseFloat(result.lon);
 
-              // Centrage de la carte sur le lieu recherché
               map.setView([latitude, longitude], 15);
 
-              // Suppression du marqueur précédent (s'il existe)
               if (currentLocationMarker) {
                 map.removeLayer(currentLocationMarker);
               }
 
-              // Ajout d'un nouveau marqueur pour le lieu recherché
               currentLocationMarker = L.marker([latitude, longitude]).addTo(map);
               currentLocationMarker.bindPopup("<b>" + result.display_name + "</b>").openPopup();
             } else {
@@ -70,18 +65,37 @@
     }
 
     function getCurrentLocation() {
-      // Code pour récupérer la position actuelle de l'utilisateur...
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+
+          // Centrer la carte sur la position actuelle
+          map.setView([latitude, longitude], 15);
+
+          // Supprimer le marqueur précédent (s'il existe)
+          if (currentLocationMarker) {
+            map.removeLayer(currentLocationMarker);
+          }
+
+          // Ajouter un marqueur pour la position actuelle
+          currentLocationMarker = L.marker([latitude, longitude]).addTo(map);
+          currentLocationMarker.bindPopup("Votre position actuelle").openPopup();
+        }, function(error) {
+          console.log('Erreur de géolocalisation:', error);
+          alert("Impossible de récupérer votre position actuelle.");
+        });
+      } else {
+        alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
+      }
     }
 
-    // Chargement dynamique de la bibliothèque Google Maps avec la clé API
-    function loadGoogleMaps() {
-      var script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMap`;
-      document.body.appendChild(script);
-    }
-
-    // Appel de la fonction pour charger Google Maps au chargement de la page
-    window.onload = loadGoogleMaps;
+    document.getElementById("searchInput").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        searchLocation();
+      }
+    });
   </script>
   <button onclick="getCurrentLocation()">Ma position actuelle</button>
 </body>
