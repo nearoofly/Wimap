@@ -69,35 +69,20 @@
       }
     }
 
-    // Récupération de la position actuelle de l'utilisateur
     function getCurrentLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
-
-          // Centrage de la carte sur la position actuelle
-          map.setView([latitude, longitude], 15);
-
-          // Suppression du marqueur précédent (s'il existe)
-          if (currentLocationMarker) {
-            map.removeLayer(currentLocationMarker);
-          }
-
-          // Ajout d'un nouveau marqueur pour la position actuelle
-          currentLocationMarker = L.marker([latitude, longitude]).addTo(map);
-          currentLocationMarker.bindPopup("Votre position actuelle").openPopup();
-        }, function(error) {
-          console.log('Erreur lors de la récupération de la position:', error);
-          alert("Impossible de récupérer votre position actuelle.");
-        });
-      } else {
-        alert("La géolocalisation n'est pas prise en charge par votre navigateur.");
-      }
+      // Code pour récupérer la position actuelle de l'utilisateur...
     }
+
+    // Chargement dynamique de la bibliothèque Google Maps avec la clé API
+    function loadGoogleMaps() {
+      var script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMap`;
+      document.body.appendChild(script);
+    }
+
+    // Appel de la fonction pour charger Google Maps au chargement de la page
+    window.onload = loadGoogleMaps;
   </script>
   <button onclick="getCurrentLocation()">Ma position actuelle</button>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaS99opijfm_UsZOPrKko40-bamGAmwDk"></script>
 </body>
 </html>
