@@ -1,5 +1,5 @@
 # wimappy.com
-This creation is simple map project.Thanks to your visite you welcome !
+This creation is a simple map project.Thanks to your visite you welcome !
 <a href="https://ibb.co/PWhgCJP"><img src="https://i.ibb.co/n1cjk4Y/My-project-1-4.jpg" alt="My-project-1-4" border="0"></a>
 
 Application Cartographique Simple avec Leaflet
