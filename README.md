@@ -62,4 +62,4 @@ OpenStreetMap - Fournisseur de données cartographiques.
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⠟⠁
 
 B⃠y⃠ w⃠i⃠l⃠l⃠y⃠  s⃠e⃠c⃠u⃠r⃠i⃠t⃠y⃠
-##ᵇʸ ʷⁱˡˡʸ 
+##ᵇʸ Goofly 
